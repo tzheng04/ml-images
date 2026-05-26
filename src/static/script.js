@@ -7,7 +7,7 @@ ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
 
 ctx.strokeStyle = "black";
-ctx.lineWidth = 18;
+ctx.lineWidth = 36;
 ctx.lineCap = "round";
 
 canvas.addEventListener("mousedown", () => {
