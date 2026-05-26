@@ -1,5 +1,5 @@
 # ml-images
-ML classifier for handwritten characters, with an interactive web [https://ml-images.onrender.com](app).  
+ML classifier for handwritten characters, with an interactive web [app](https://ml-images.onrender.com).  
 
 The classifier is a Convolutional Neural Network (CNN) which classifies handwritten characters (0-9, A-Z, a-z).  
 Users can draw a character on the canvas and the model will attempt to predict which character it is.  
