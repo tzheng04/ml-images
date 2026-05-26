@@ -4,6 +4,14 @@ ML classifier for handwritten characters, with an interactive web app.
 The classifier is a Convolutional Neural Network (CNN) which classifies handwritten characters (0-9, A-Z, a-z).  
 Users can draw a character on the canvas and the model will attempt to predict which character it is.  
 
+# Libraries
+- Flask
+- tensorflow
+- numpy
+- PIL
+- pandas
+- sklearn
+
 # Dataset
 Image set downloaded via Kaggle: [https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset](https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset)  
 Includes 62 different characters (0-9, A-Z, a-z) with 55 samples from each class.  
