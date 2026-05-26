@@ -4,7 +4,6 @@ import numpy as np
 from PIL import Image
 import base64
 import io
-from pathlib import Path
 
 app = Flask(__name__)
 
