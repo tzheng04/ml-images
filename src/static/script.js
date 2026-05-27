@@ -40,6 +40,7 @@ function clearCanvas() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     document.getElementById("prediction").innerText = "Draw something and click Submit";
+    document.getElementById("feedback").setAttribute("hidden", "");
 }
 
 async function predict() {
@@ -58,4 +59,5 @@ async function predict() {
     const result = await response.json();
 
     document.getElementById("prediction").innerText = `Prediction: ${result.prediction} with ${result.confidence}% confidence`;
+    document.getElementById("feedback").removeAttribute("hidden");
 }
