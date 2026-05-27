@@ -40,7 +40,8 @@ function clearCanvas() {
     ctx.fillRect(0, 0, canvas.width, canvas.height);
 
     document.getElementById("prediction").innerText = "Draw something and click Submit";
-    document.getElementById("feedback").setAttribute("hidden", "");
+    resetFeedback();
+    document.getElementById("submitted").setAttribute("hidden", "");
 }
 
 async function predict() {
@@ -59,5 +60,50 @@ async function predict() {
     const result = await response.json();
 
     document.getElementById("prediction").innerText = `Prediction: ${result.prediction} with ${result.confidence}% confidence`;
+    resetFeedback();
     document.getElementById("feedback").removeAttribute("hidden");
+}
+
+function correct() {
+    document.getElementById("confirm").removeAttribute("hidden");
+    document.getElementById("correct").setAttribute("hidden", "");
+}
+
+function confirmCorrect() {
+    document.getElementById("submitted").removeAttribute("hidden");
+    document.getElementById("feedback").setAttribute("hidden", "");
+
+    document.getElementById("correct").removeAttribute("hidden");
+    document.getElementById("confirm").setAttribute("hidden", "");
+}
+
+function incorrect() {
+    document.getElementById("incorrect").removeAttribute("hidden");
+    document.getElementById("feedback").setAttribute("hidden", "");
+}
+
+function submitFeedback() {
+    let character = document.getElementById("char").value;
+    const regex = /[0-9A-Za-z]{1,}/;
+    if (!regex.test(character)) {
+        alert("Please enter a single valid character matching [0-9A-Za-z]{1,}");
+    } else {
+        document.getElementById("submitted").removeAttribute("hidden");
+    }
+}
+
+function cancel(){
+    resetFeedback();
+    document.getElementById("feedback").removeAttribute("hidden");
+}
+
+function resetFeedback() {
+    document.getElementById("char").value = "";
+    document.getElementById("feedback").setAttribute("hidden", "");
+    document.getElementById("correct").setAttribute("hidden", "");
+    document.getElementById("incorrect").setAttribute("hidden", "");
+    document.getElementById("submitted").setAttribute("hidden", "");
+
+    document.getElementById("correct").removeAttribute("hidden");
+    document.getElementById("confirm").setAttribute("hidden", "");
 }

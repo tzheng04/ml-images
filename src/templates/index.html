@@ -1,25 +1,42 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Handwritten Character Classifier</title>
-        <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
-    </head>
-    <body>
-        <h1>Character Classifier</h1>
 
-        <canvas id="canvas" width="360" height="360"></canvas>
-        <br>
+<head>
+    <title>Handwritten Character Classifier</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
 
-        <button onclick="clearCanvas()">Clear</button>
-        <button onclick="predict()">Submit</button>
+<body>
+    <h1>Character Classifier</h1>
 
-        <div id="prediction">Draw something and click Submit</div>
+    <canvas id="canvas" width="360" height="360"></canvas>
 
-        <div id="feedback" hidden>
-            <button onclick="">Correct</button>
-            <button onclick="">Incorrect</button>
-        </div>
+    <br>
 
-        <script src="/static/script.js"></script>
-    </body>
+    <button onclick="clearCanvas()">Clear</button>
+    <button onclick="predict()">Submit</button>
+
+    <div id="prediction">Draw something and click Submit</div>
+
+    <br>
+
+    <div id="feedback" hidden>
+        <button id="correct" onclick="correct()">Correct</button>
+        <button id="confirm" onclick="confirmCorrect()" hidden>Confirm?</button>
+        <button onclick="incorrect()">Incorrect</button>
+    </div>
+
+    <div id="incorrect" hidden>
+        <label>Enter the correct character: </label>
+        <input id="char" type="text" maxlength="1" placeholder="[0-9A-Za-z]{1,}">
+        <button onclick="submitFeedback()">Confirm</button>
+        <button onclick="cancel()">Cancel</button>
+    </div>
+
+
+    <div id="submitted" hidden>Feedback submitted!</div>
+
+    <script src="/static/script.js"></script>
+</body>
+
 </html>

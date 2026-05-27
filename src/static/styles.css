@@ -10,3 +10,8 @@ canvas {
     background-color: white;
     cursor: url("icons/cursor.png") 14 14, auto;
 }
+
+input {
+    width: 10em;
+    text-align: center;
+}
