@@ -88,6 +88,7 @@ function submitFeedback() {
     if (!regex.test(character)) {
         alert("Please enter a single valid character matching [0-9A-Za-z]{1,}");
     } else {
+        resetFeedback();
         document.getElementById("submitted").removeAttribute("hidden");
     }
 }
