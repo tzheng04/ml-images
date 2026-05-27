@@ -8,5 +8,5 @@ body {
 canvas {
     border: 2px solid black;
     background-color: white;
-    cursor: crosshair;
+    cursor: url("icons/cursor.png") 14 14, auto;
 }
