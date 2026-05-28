@@ -42,7 +42,7 @@ async function predict() {
 
     setResult(result);
 
-    document.getElementById("prediction").innerText = `Prediction: ${result.prediction} with ${result.confidence}% confidence`;
+    document.getElementById("prediction").innerText = `Prediction: ${result.prediction} with ${result.confidence.toFixed(3)}% confidence`;
 
     resetFeedback();
     document.getElementById("feedback").removeAttribute("hidden");
