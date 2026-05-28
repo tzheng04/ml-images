@@ -34,7 +34,7 @@ export function submitFeedback() {
     const regex = /^[0-9A-Za-z]$/;
 
     if (!regex.test(character)) {
-        alert("Please enter a single valid character matching [0-9A-Za-z]");
+        alert("Please enter a single valid character matching ^[0-9A-Za-z]$");
     } else {
         resetFeedback();
         document.getElementById("submitted").removeAttribute("hidden");
