@@ -5,7 +5,7 @@ import {
     setConfirmationPending
 } from "./canvas.js";
 
-import { requestPrediction } from "./api.js";
+import { requestPrediction } from "./dbApi.js";
 
 import {
     setResult,

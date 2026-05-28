@@ -1,5 +1,5 @@
 import { getCanvasImage } from "./canvas.js";
-import { sendToDB } from "./api.js";
+import { sendToDB } from "./dbApi.js";
 
 let result = null;
 
