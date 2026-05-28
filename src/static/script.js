@@ -4,7 +4,7 @@ const ctx = canvas.getContext("2d");
 let drawing = false;
 let confirmationPending = false;
 
-const result;
+let result = null;
 
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
