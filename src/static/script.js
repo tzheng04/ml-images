@@ -128,7 +128,7 @@ function resetFeedback() {
     confirmationPending = false;
 }
 
-async function sendToDB(truth, prediction, image, correct) {
+async function sendToDB(truth, prediction, img, correct) {
     const response = await fetch("/submit", {
         method: "POST",
         headers: {
@@ -137,7 +137,7 @@ async function sendToDB(truth, prediction, image, correct) {
         body: JSON.stringify({
             true_label: truth,
             predicted_label: prediction,
-            image: imageData,
+            image: img,
             was_correct: correct
         })
     });
