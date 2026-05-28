@@ -128,7 +128,7 @@ function resetFeedback() {
     confirmationPending = false;
 }
 
-function sendToDB(truth, prediction, image, correct) {
+async function sendToDB(truth, prediction, image, correct) {
     const response = await fetch("/submit", {
         method: "POST",
         headers: {
