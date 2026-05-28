@@ -3,12 +3,15 @@ ML classifier for handwritten characters, with an interactive web [app](https://
 
 The classifier is a Convolutional Neural Network (CNN) which classifies handwritten characters (0-9, A-Z, a-z).  
 Users can draw a character on the canvas and the model will attempt to predict which character it is.  
+Users can also provide feedback for the model's predictions to help improve accuracy.
 
 # Libraries
 - Flask
 - tensorflow
 - numpy
-- PIL
+- Pillow
+- python-dotenv
+- pymongo
 - pandas
 - sklearn
 
@@ -31,7 +34,7 @@ I found that removing the dropout layer caused severe overfitting. It allowed th
 
 ## Conclusion
 Although this is a very simple application of the CNN, it is interesting to see how well it performs.  
-I wish I had a larger dataset to train my model. I am considering allowing user input to be used as additional training data.  
+I wish I had a larger dataset to train my model. I created a feature to save user drawings to help tune the model.
 Another interesting idea to explore in the future is to train an ML model that can read a sequence of handwritten characters (names, words, sentences, etc).  
 
 # References
