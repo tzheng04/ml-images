@@ -5,10 +5,20 @@ from PIL import Image
 import base64
 import io
 import os
+from dotenv import load_dotenv
+from pymongo import MongoClient
+from datetime import datetime, timezone
 
 app = Flask(__name__)
 
 model = tf.keras.models.load_model("./models/char_cnn.keras")
+
+load_dotenv("./credentials/.env")
+db_url = os.getenv("MONGO_CONNECTION_STRING")
+
+client = MongoClient(db_url)
+db = client["classifier"]
+collection = db["feedback"]
 
 classes = [
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
@@ -56,6 +66,22 @@ def predict():
         "prediction": res,
         "confidence": conf
     })
+
+@app.route("/submit", methods=["POST"])
+def updateDB():
+    data = request.get_json()
+
+    entry = {
+        "true_label": data.get("true_label"),
+        "predicted_label": data.get("predicted_label"),
+        "image_b64": data.get("image"),
+        "was_correct": data.get("was_correct"),
+        "time": datetime.now(timezone.utc)
+    }
+
+    result = collection.insert_one(entry)
+
+    return jsonify({"id": str(result.inserted_id)})
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))

@@ -2,6 +2,9 @@ const canvas = document.getElementById("canvas");
 const ctx = canvas.getContext("2d");
 
 let drawing = false;
+let confirmationPending = false;
+
+const result;
 
 ctx.fillStyle = "white";
 ctx.fillRect(0, 0, canvas.width, canvas.height);
@@ -11,7 +14,9 @@ ctx.lineWidth = 36;
 ctx.lineCap = "round";
 
 canvas.addEventListener("mousedown", () => {
-    drawing = true;
+    if (!confirmationPending) {
+        drawing = true;
+    }
 });
 
 canvas.addEventListener("mouseup", () => {
@@ -57,7 +62,7 @@ async function predict() {
         })
     });
 
-    const result = await response.json();
+    result = await response.json();
 
     document.getElementById("prediction").innerText = `Prediction: ${result.prediction} with ${result.confidence}% confidence`;
     resetFeedback();
@@ -67,6 +72,8 @@ async function predict() {
 function correct() {
     document.getElementById("confirm").removeAttribute("hidden");
     document.getElementById("correct").setAttribute("hidden", "");
+
+    confirmationPending = true;
 }
 
 function confirmCorrect() {
@@ -75,11 +82,16 @@ function confirmCorrect() {
 
     document.getElementById("correct").removeAttribute("hidden");
     document.getElementById("confirm").setAttribute("hidden", "");
+
+    const imageData = canvas.toDataURL("image/png");
+    sendToDB(result.prediction, result.prediction, imageData, true);
+    confirmationPending = false;
 }
 
 function incorrect() {
     document.getElementById("incorrect").removeAttribute("hidden");
     document.getElementById("feedback").setAttribute("hidden", "");
+    confirmationPending = true;
 }
 
 function submitFeedback() {
@@ -90,12 +102,18 @@ function submitFeedback() {
     } else {
         resetFeedback();
         document.getElementById("submitted").removeAttribute("hidden");
+
+        const imageData = canvas.toDataURL("image/png");
+        sendToDB(character, result.prediction, imageData, false);
+        confirmationPending = false;
     }
 }
 
 function cancel(){
     resetFeedback();
     document.getElementById("feedback").removeAttribute("hidden");
+
+    confirmationPending = false;
 }
 
 function resetFeedback() {
@@ -107,4 +125,25 @@ function resetFeedback() {
 
     document.getElementById("correct").removeAttribute("hidden");
     document.getElementById("confirm").setAttribute("hidden", "");
+    confirmationPending = false;
 }
+
+function sendToDB(truth, prediction, image, correct) {
+    const response = await fetch("/submit", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            true_label: truth,
+            predicted_label: prediction,
+            image: imageData,
+            was_correct: correct
+        })
+    });
+
+    const result = await response.json();
+    console.log(result.id);
+}
+    
+    
