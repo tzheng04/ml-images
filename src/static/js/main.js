@@ -52,7 +52,7 @@ async function predict() {
 function clearCanvas() {
     clearCanvasDrawing();
 
-    document.getElementById("prediction").innerText = "Draw something and click Submit";
+    document.getElementById("prediction").innerText = "Draw a character and click the 'Predict' button.";
 
     resetFeedback();
     document.getElementById("submitted").setAttribute("hidden", "");
