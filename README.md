@@ -40,7 +40,9 @@ I found that removing the dropout layer caused severe overfitting. It allowed th
 I also had to adjust the canvas size and brush thickness to try to emulate the resolution of the training dataset. After tweaking these parameters, the demo saw great improvement in prediction performance.
 
 ## Feedback feature
-I thought it would be an interesitng idea to allow users to upload their character drawings to help expand the dataset. Of course, for the purposes of the demo, there is no verification of user drawings. I assume that there are no malicious users and only accurate responses are submitted.
+I thought it would be an interesting idea to allow users to upload their character drawings to help expand the dataset.  
+I implemented a feature which inserts the user's image and character label as entries in a MongoDB collection. These additional data points can be used to retrain the model and improve classification accuracy.  
+Of course, for the purposes of the demo, there is no verification of user drawings. I assume that there are no malicious users and only accurate responses are submitted.
 
 ## Dataset extension
 The original model I trained was using for the demo was having an issue where it could not predict ['1', 'I', 'N', 'i'] (0% success rate in the demo). It also was struggling to recognize lowercase characters.  
