@@ -1,3 +1,6 @@
-data
+data/Img
+data/english.csv
+data/images.zip
+data/extra/*.png
 src/credentials
 src/__pycache__
