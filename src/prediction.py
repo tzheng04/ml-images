@@ -4,7 +4,7 @@ from PIL import Image
 import base64
 import io
 
-model = tf.keras.models.load_model("./models/char_cnn.keras")
+model = tf.keras.models.load_model("./models/char_cnn_feedback.keras")
 
 classes = [
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
