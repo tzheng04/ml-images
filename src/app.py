@@ -34,12 +34,17 @@ def predict():
 @app.route("/submit", methods=["POST"])
 def updateDB():
     data = request.get_json()
+    correct = data.get("was_correct")
+    true = data.get("true_label")
+    pred = data.get("predicted_label")
+    if (true == pred):
+        correct = True
 
     entry = {
-        "true_label": data.get("true_label"),
-        "predicted_label": data.get("predicted_label"),
+        "true_label": true,
+        "predicted_label": pred,
         "image_b64": data.get("image"),
-        "was_correct": data.get("was_correct"),
+        "was_correct": correct,
         "time": datetime.now(timezone.utc)
     }
 
