@@ -19,7 +19,7 @@ Users can also provide feedback for the model's predictions to help improve accu
 Image set downloaded via Kaggle: [https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset](https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset)  
 Includes 62 different characters (0-9, A-Z, a-z) with 55 samples from each class.  
 
-# Method
+# Initial method
 ## Preprocessing
 Inputs are resized to 64x64, converted to grayscale, and normalized before training/prediction. I used an 80/20 train/test split.
 
@@ -29,12 +29,28 @@ The ML model uses a convolutional neural network consisting of three convolution
 ## Evaluation
 I compared the CNN model to a simple 1NN Euclidean distance classifier. I found that the 1NN classifier achieved roughly 41% accuracy on the test set while the CNN classifier achieved around 74% accuracy.  
 
-## Improvements
+## Observed issues
+Many of the classes look very similar, especially to an image classifier. For example, consider the sets {1, I, i, j, l}, {0, O, o}, {2, Z, z}, to name a few.  
+There are also examples of letters where the upper and lower case versions look nearly identical: {C, c} {K, k}, {O, o}, {P, p}, {S, s}, {U, u}, {V, v}, {W, w}, {X, x}, {Z, z}  
+There are also characters that can be written in different styles: {2, 4, 7, a, t, z}  
+![Example of '4' variations](./data/examples/variations.png)
+# Improvements
+## Immediate changes
 I found that removing the dropout layer caused severe overfitting. It allowed the CNN to reach over 90% accuracy on the training set, but test accuracy dropped below 70%.   
+I also had to adjust the canvas size and brush thickness to try to emulate the resolution of the training dataset. After tweaking these parameters, the demo saw great improvement in prediction performance.
+
+## Feedback feature
+I thought it would be an interesitng idea to allow users to upload their character drawings to help expand the dataset. Of course, for the purposes of the demo, there is no verification of user drawings. I assume that there are no malicious users and only accurate responses are submitted.
+
+## Dataset extension
+The original model I trained was using for the demo was having an issue where it could not predict ['1', 'I', 'N', 'i'] (0% success rate in the demo). It also was struggling to recognize lowercase characters.  
+I figured the best way to fix this issue was to retrain the model with more samples. I spent some time to hand draw 15 samples of each class, creating 930 new samples in total.  
+I was excited to find that this was able to bring the model's test accuracy up to 79%.  
+You can observe the improvements by trying out the new model on the [interactive web app](https://ml-images.onrender.com). It's now able to consistently recognize the characters with very high confidence.
 
 ## Conclusion
-Although this is a very simple application of the CNN, it is interesting to see how well it performs.  
-I wish I had a larger dataset to train my model. I created a feature to save user drawings to help tune the model.
+Although this is a very simple application of the CNN, I was very pleased to see how well it performs.  
+I was surprised how large of an improvement I saw by simply adding 15 samples to each class. Admittedly, I suspect much of the inaccuracy can be attributed to the resolution difference between the canvas and the original dataset. Additionally, the thickness of the brush size also had an effect on prediction accuracy (though I tried to get it as close as possible).  
 Another interesting idea to explore in the future is to train an ML model that can read a sequence of handwritten characters (names, words, sentences, etc).  
 
 # References
