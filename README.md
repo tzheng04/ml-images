@@ -46,7 +46,7 @@ Of course, for the purposes of the demo, there is no verification of user drawin
 
 ## Dataset extension
 The original model I trained was using for the demo was having an issue where it could not predict ['1', 'I', 'N', 'i'] (0% success rate in the demo). It also was struggling to recognize lowercase characters.  
-I figured the best way to fix this issue was to retrain the model with more samples. I spent some time to hand draw 15 samples of each class, creating 930 new samples in total.  
+I figured the best way to fix this issue was to retrain the model with more samples. I spent some time to hand draw 15 samples of each class, creating an [additional dataset](./data/extra/extra.zip) with 930 new samples in total.  
 I was excited to find that this was able to bring the model's test accuracy up to 79%.  
 You can observe the improvements by trying out the new model on the [interactive web app](https://ml-images.onrender.com). It's now able to consistently recognize the characters with very high confidence.
 
