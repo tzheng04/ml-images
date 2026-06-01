@@ -11,6 +11,13 @@ canvas {
     cursor: url("../icons/cursor.png") 14 14, auto;
 }
 
+#prediction {
+    font-family: "Roboto Mono", monospace;
+    font-optical-sizing: auto;
+    font-weight: 400;
+    font-style: normal;
+}
+
 input {
     width: 10em;
     text-align: center;
