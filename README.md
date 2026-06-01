@@ -33,7 +33,7 @@ I compared the CNN model to a simple 1NN Euclidean distance classifier. I found 
 Many of the classes look very similar, especially to an image classifier. For example, consider the sets {1, I, i, j, l}, {0, O, o}, {2, Z, z}, to name a few.  
 There are also examples of letters where the upper and lower case versions look nearly identical: {C, c} {K, k}, {O, o}, {P, p}, {S, s}, {U, u}, {V, v}, {W, w}, {X, x}, {Z, z}  
 There are also characters that can be written in different styles: {2, 4, 7, a, t, z}  
-![Example of '4' variations](./data/examples/variations.png)
+![Example of '4' variations](./examples/variations.png)
 # Improvements
 ## Immediate changes
 I found that removing the dropout layer caused severe overfitting. It allowed the CNN to reach over 90% accuracy on the training set, but test accuracy dropped below 70%.   
