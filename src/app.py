@@ -13,7 +13,7 @@ db_url = os.getenv("MONGO_CONNECTION_STRING")
 
 client = MongoClient(db_url)
 db = client["classifier"]
-collection = db["feedback"]
+collection = db["demo"]
 
 @app.route("/")
 def index():
