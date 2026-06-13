@@ -12,7 +12,7 @@ export async function requestPrediction(imageData) {
     return await response.json();
 }
 
-export async function sendToDB(truth, prediction, img, correct, conf) {
+export async function sendToDB(truth, prediction, img, correct, conf, model_name) {
     const response = await fetch("/submit", {
         method: "POST",
         headers: {
@@ -23,7 +23,8 @@ export async function sendToDB(truth, prediction, img, correct, conf) {
             predicted_label: prediction,
             image: img,
             was_correct: correct,
-            confidence: conf
+            confidence: conf,
+            model_name: model_name
         })
     });
 

@@ -3,4 +3,4 @@ tensorflow
 numpy
 pillow
 python-dotenv
-pymongo
+psycopg

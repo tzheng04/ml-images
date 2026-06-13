@@ -20,7 +20,7 @@ export function confirmCorrect() {
     document.getElementById("confirmCorrect-button").setAttribute("hidden", "");
 
     const imageData = getCanvasImage();
-    sendToDB(result.prediction, result.prediction, imageData, true, result.confidence);
+    sendToDB(result.prediction, result.prediction, imageData, true, result.confidence, result.model_name);
 }
 
 export function incorrect() {
@@ -40,7 +40,7 @@ export function submitFeedback() {
         document.getElementById("submitted").removeAttribute("hidden");
 
         const imageData = getCanvasImage();
-        sendToDB(character, result.prediction, imageData, false, result.confidence);
+        sendToDB(character, result.prediction, imageData, false, result.confidence, result.model_name);
     }
 }
 

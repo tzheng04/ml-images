@@ -11,7 +11,7 @@ Users can also provide feedback for the model's predictions to help improve accu
 - numpy
 - Pillow
 - python-dotenv
-- pymongo
+- psycopg
 - pandas
 - sklearn
 
@@ -41,7 +41,7 @@ I also had to adjust the canvas size and brush thickness to try to emulate the r
 
 ## Feedback feature
 I thought it would be an interesting idea to allow users to upload their character drawings to help expand the dataset.  
-I implemented a feature which inserts the user's image and character label as entries in a MongoDB collection. These additional data points can be used to retrain the model and improve classification accuracy.  
+I implemented a feature which inserts the user's image and character label as entries into a database table. These additional data points can be used to retrain the model and improve classification accuracy.  
 Of course, for the purposes of the demo, there is no verification of user drawings. I assume that there are no malicious users and only accurate responses are submitted.
 
 ## Dataset extension

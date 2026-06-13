@@ -16,10 +16,3 @@ CREATE TABLE predictions (
     model_id INTEGER REFERENCES models(id),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-CREATE TABLE feedback (
-    id SERIAL PRIMARY KEY,
-    prediction_id INTEGER REFERENCES predictions(id),
-    corrected_label TEXT NOT NULL,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
