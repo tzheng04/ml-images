@@ -60,4 +60,4 @@ de Campos, T. E., Babu, B. R., & Varma, M. (2009). *Character recognition in nat
 Convolutional Neural Network Tutorial via TensorFlow [https://www.tensorflow.org/tutorials/images/cnn](https://www.tensorflow.org/tutorials/images/cnn)  
 
 # AI Disclaimer
-I used ChatGPT as a learning and debugging aid during development. It was useful for brainstorming ideas, troubleshooting errors, and implementing the web demo. 
+I used ChatGPT as a learning and debugging aid during development. It was useful for brainstorming ideas, troubleshooting errors, and implementing various features. 
