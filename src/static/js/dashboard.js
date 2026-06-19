@@ -1,4 +1,4 @@
-import { query } from "./dbApi";
+import { query } from "./dbApi.js";
 
 const accuracyButton = document.getElementById("accuracy-button");
 const confusionButton = document.getElementById("confusion-button");
@@ -11,34 +11,38 @@ resetButton.addEventListener("click", reset);
 
 function generateTable(cols, rows) {
     let html = "<table><tr>";
-    for (i = 0; i < cols.length(); i++) {
-        html += `<th>${cols[i]}<\\th>`;
+    for (let i = 0; i < cols.length; i++) {
+        html += `<th>${cols[i]}</th>`;
     }
-    html += "<\\tr>";
-    for (i = 0; i < ((10 <= rows.length()) ? 10 : rows.length()); i++) {
+    html += "</tr>";
+    for (let i = 0; i < ((10 <= rows.length) ? 10 : rows.length); i++) {
         html += "<tr>";
-        for (j = 0; j < rows[i].length(); i++) {
-            html += `<td>${rows[i][i]}<\\td>`;
+        for (let j = 0; j < rows[i].length; j++) {
+            html += `<td>${rows[i][j]}</td>`;
         }
-        html += "<\\tr>";
+        html += "</tr>";
     }
-    html += "<\\table>";
+    html += "</table>";
+
+    return html
 }
 
-function accuracy() {
-    let cols, rows = query("accuracy");
-    let table = generateTable(cols, rows);
+async function accuracy() {
+    const result = await query("accuracy");
+    console.log(result.cols)
+    console.log(result.rows)
+    let table = generateTable(result.cols, result.rows);
     
-    tableDiv.innerHtml = table;
+    tableDiv.innerHTML = table;
 }
 
-function confusion() {
-    let cols, rows = query("confusion");
-    let table = generateTable(cols, rows);
+async function confusion() {
+    const result = await query("confusion");
+    let table = generateTable(result.cols, result.rows);
     
-    tableDiv.innerHtml = table;
+    tableDiv.innerHTML = table;
 }
 
 function reset() {
-    tableDiv.innerHtml = "<div></div>";
+    tableDiv.innerHTML = "<div></div>";
 }
