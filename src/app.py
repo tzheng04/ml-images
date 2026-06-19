@@ -2,11 +2,10 @@ from flask import Flask, render_template, request, jsonify
 import os
 from dotenv import load_dotenv
 from prediction import character_prediction
-from db import add_prediction
+from db import add_prediction, get_sql
 app = Flask(__name__)
 
 load_dotenv("./credentials/.env")
-
 
 @app.route("/")
 def index():
@@ -46,6 +45,21 @@ def updateDB():
     )
 
     return jsonify({"prediction_id": prediction_id})
+
+@app.route("/dashboard")
+def dashboard():
+    return render_template("dashboard.html")
+
+@app.route("/query", methods=["POST"])
+def query():
+    sql_file = request.get_json().get("sql_file")
+    cols, rows = get_sql(sql_file)
+
+    return jsonify({
+        "received": len(rows),
+        "cols": cols,
+        "rows": rows    
+    })
 
 if __name__ == "__main__":
     # port = int(os.environ.get("PORT", 10000))

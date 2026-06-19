@@ -33,3 +33,17 @@ export async function sendToDB(truth, prediction, img, correct, conf, model_name
     console.log("Status:", response.status);
     console.log("Response:", text);
 }
+
+export async function query(query_type) {
+    const response = await fetch("/query", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+            sql_file: query_type
+        })
+    });
+
+    return await response.json();
+}
