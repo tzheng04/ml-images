@@ -18,7 +18,11 @@ function generateTable(cols, rows) {
     for (let i = 0; i < ((10 <= rows.length) ? 10 : rows.length); i++) {
         html += "<tr>";
         for (let j = 0; j < rows[i].length; j++) {
-            html += `<td>${rows[i][j]}</td>`;
+            if (j == 3) {
+                html += `<td>${(rows[i][j]*100).toFixed(2)}%</td>`;
+            } else {
+                html += `<td>${rows[i][j]}</td>`
+            }
         }
         html += "</tr>";
     }
