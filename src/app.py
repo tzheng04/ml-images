@@ -58,7 +58,7 @@ def query():
     return jsonify({
         "received": len(rows),
         "cols": cols,
-        "rows": rows    
+        "rows": rows
     })
 
 if __name__ == "__main__":
