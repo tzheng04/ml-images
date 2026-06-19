@@ -22,3 +22,22 @@ input {
     width: 10em;
     text-align: center;
 }
+
+#table-container {
+    display: flex;
+    justify-content: center;
+}
+
+table {
+    background-color: white;
+}
+
+th {
+    border: 2px solid black;
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+td {
+    border: 2px solid black;
+}
