@@ -5,4 +5,5 @@ SELECT
 FROM predictions
 WHERE NOT was_correct
 GROUP BY true_label, predicted_label
-ORDER BY num_instances DESC
+ORDER BY num_instances DESC, true_label ASC
+LIMIT %s OFFSET %s;
