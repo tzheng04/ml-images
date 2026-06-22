@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify
 import os
 from dotenv import load_dotenv
 from prediction import character_prediction
-from db import add_prediction, get_sql
+from db import add_prediction, get_sql_stats
 app = Flask(__name__)
 
 load_dotenv("./credentials/.env")
@@ -53,7 +53,9 @@ def dashboard():
 @app.route("/query", methods=["POST"])
 def query():
     sql_file = request.get_json().get("sql_file")
-    cols, rows = get_sql(sql_file)
+    sql_limit = request.get_json().get("sql_limit")
+    sql_offset = request.get_json().get("sql_offset")
+    cols, rows = get_sql_stats(sql_file, sql_limit, sql_offset)
 
     return jsonify({
         "received": len(rows),

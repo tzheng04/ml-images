@@ -44,13 +44,13 @@ def add_prediction(true_label, predicted_label, image_b64, was_correct, confiden
             prediction_id = cur.fetchone()[0]
             return prediction_id
         
-def get_sql(sql_file):
+def get_sql_stats(sql_file, limit, offset):
     with open(f"../sql/{sql_file}.sql", "r") as file:
         query = file.read()
 
     with get_connection() as conn:
         with conn.cursor() as cur:
-            cur.execute(query)
+            cur.execute(query, (limit, offset))
             col_names = [desc[0] for desc in cur.description]
             rows = cur.fetchall()
             return col_names, rows
