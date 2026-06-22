@@ -16,7 +16,7 @@
 <body>
     <h1>Dashboard</h1>
 
-    <div id="buttons">
+    <div id="query-buttons">
         <button id="accuracy-button">Accuracy</button>
         <button id="confusion-button">Confusion</button>
     </div>
@@ -24,13 +24,19 @@
     <br>
 
     <div id="table-container">
-        <div id="table"></div>
+        <table id="table"></table>
+    </div>
+
+    <div id="display-container">
+        <button id="prev" hidden><- Prev</button>
+        <div id="display">Select a button to display results</div>
+        <button id="next" hidden>Next -></button>
     </div>
 
     <br>
 
     <div>
-        <button id="reset-button">Reset</button>
+        <button id="reset-button" hidden>Reset</button>
     </div>
 
     <script type="module" src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
