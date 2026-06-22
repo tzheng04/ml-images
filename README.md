@@ -4,6 +4,7 @@ ML classifier for handwritten characters, with an [interactive web app](https://
 The classifier is a Convolutional Neural Network (CNN) which classifies handwritten characters (0-9, A-Z, a-z).  
 Users can draw a character on the canvas and the model will attempt to predict which character it is.  
 Users can also provide feedback for the model's predictions to help improve accuracy.
+![Classification example](./examples/classify.png)
 
 # Libraries
 - Flask
@@ -25,6 +26,7 @@ Inputs are resized to 64x64, converted to grayscale, and normalized before train
 
 ## Model
 The ML model uses a convolutional neural network consisting of three convolutional layers with 32, 64, and 128 filters, respectively. Each layer uses ReLU activation and subsequently 2x2 max pooling. The output is then flattened and passed through a fully connected layer with 128 ReLU neurons. A 30% dropout layer is used to reduce overfitting before the final softmax layer with 62 outputs corresponding to the 62 classes.  
+![Model summary](./examples/model.png)
 
 ## Evaluation
 I compared the CNN model to a simple 1NN Euclidean distance classifier. I found that the 1NN classifier achieved roughly 41% accuracy on the test set while the CNN classifier achieved around 74% accuracy.  
@@ -48,6 +50,7 @@ Of course, for the purposes of the demo, there is no verification of user drawin
 The original model I trained was using for the demo was having an issue where it could not predict ['1', 'I', 'N', 'i'] (0% success rate in the demo). It also was struggling to recognize lowercase characters.  
 I figured the best way to fix this issue was to retrain the model with more samples. I spent some time to hand draw 15 samples of each class, creating an [additional dataset](./data/extra/extra.zip) with 930 new samples in total.  
 I was excited to find that this was able to bring the model's test accuracy up to 79%.  
+![Test accuracy after training with extended dataset](./examples/improved.png)
 You can observe the improvements by trying out the new model on the [interactive web app](https://ml-images.onrender.com). It's now able to consistently recognize the characters with very high confidence.
 
 ## Conclusion
