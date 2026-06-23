@@ -28,7 +28,7 @@ function generateTable(cols, rows) {
     for (let i = 0; i < displayEnd; i++) {
         html += "<tr>";
         for (let j = 0; j < rows[i].length; j++) {
-            if (j == 3) {
+            if (mode == "accuracy" && j == 3) {
                 html += `<td>${(rows[i][j]*100).toFixed(2)}%</td>`;
             } else {
                 html += `<td>${rows[i][j]}</td>`
@@ -67,8 +67,6 @@ function confusion() {
     mode = "confusion";
     analytics();
 }
-
-
 
 function displayVisibility() {
     prevButton.removeAttribute("hidden");
