@@ -27,12 +27,11 @@ A PostgreSQL database is used to keep track of model versions and user predictio
 - 'predictions: stores true label, predicted label, image data, success or failure, prediction confidence, model used, and date of creation  
 
 ## Running locally
-Clone the repository and navigate into ./src. From there, run:  
-```docker compose up -d```
-```docker cp ../sql/schema.sql classifier-postgres-demo:/schema.sql```
-```docker exec -it classifier-postgres-demo psql -U postgres -d classifier_db -f /schema.sql```
-```docker cp ../sql/db_seed.sql classifier-postgres-demo:/db_seed.sql```
-```docker exec -it classifier-postgres-demo psql -U postgres -d classifier_db -f /db_seed.sql```
+1. Download and install Docker Desktop  
+2. Clone the repository and navigate into ./src/  
+3. In the terminal, run the following command:  
+```docker compose up --build```
+4. The demo will be running on http://localhost:5000/
 
 # Initial method
 ## Preprocessing
