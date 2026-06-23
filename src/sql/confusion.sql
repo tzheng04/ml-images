@@ -1,9 +1,9 @@
 SELECT
-    true_label,
-    predicted_label,
-    COUNT(*) as num_instances
+    true_label AS "Character",
+    predicted_label AS "Prediction",
+    COUNT(*) AS "Count"
 FROM predictions
 WHERE NOT was_correct
-GROUP BY true_label, predicted_label
-ORDER BY num_instances DESC, true_label ASC
+GROUP BY "Character", "Prediction"
+ORDER BY "Count" DESC, "Character" ASC
 LIMIT %s OFFSET %s;

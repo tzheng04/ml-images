@@ -7,10 +7,10 @@ WITH pred_counts AS (
     GROUP BY true_label
 )
 SELECT
-    true_label,
-    num_correct,
-    total,
-    num_correct::float / NULLIF(total, 0) AS accuracy
+    true_label AS "Character",
+    num_correct AS "Number Correct",
+    total AS "Total",
+    num_correct::float / NULLIF(total, 0) AS "Accuracy"
 FROM pred_counts
-ORDER BY accuracy ASC, true_label ASC
+ORDER BY "Accuracy" ASC, "Character" ASC
 LIMIT %s OFFSET %s;
