@@ -45,7 +45,7 @@ def add_prediction(true_label, predicted_label, image_b64, was_correct, confiden
             return prediction_id
         
 def get_sql_stats(sql_file, limit, offset):
-    with open(f"../sql/{sql_file}.sql", "r") as file:
+    with open(f"./sql/{sql_file}.sql", "r") as file:
         query = file.read()
 
     with get_connection() as conn:
