@@ -1,0 +1,25 @@
+services:
+  web:
+    build: .
+    container_name: classifier-demo
+    ports:
+      - "5000:5000"
+    environment:
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/classifier_db
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    container_name: classifier-postgres-demo
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: classifier_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - classifier-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  classifier-postgres-data:
