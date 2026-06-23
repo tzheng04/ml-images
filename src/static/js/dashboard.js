@@ -79,6 +79,7 @@ function displayVisibility() {
 function reset() {
     mode = null;
     page = 0;
+    max = 0;
     prevButton.setAttribute("hidden", "");
     nextButton.setAttribute("hidden", "");
     resetButton.setAttribute("hidden", "");
