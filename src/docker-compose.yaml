@@ -10,7 +10,7 @@ services:
       - postgres
 
   postgres:
-    image: postgres:16
+    image: postgres:18
     container_name: classifier-postgres-demo
     environment:
       POSTGRES_USER: postgres
@@ -19,7 +19,9 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - classifier-postgres-data:/var/lib/postgresql/data
+      - classifier-postgres-data:/var/lib/postgresql/
+      - ./sql/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
+      - ./sql/db_seed.sql:/docker-entrypoint-initdb.d/2-db_seed.sql
 
 volumes:
   classifier-postgres-data:
