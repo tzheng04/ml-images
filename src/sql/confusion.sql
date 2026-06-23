@@ -5,5 +5,5 @@ SELECT
 FROM predictions
 WHERE NOT was_correct
 GROUP BY "Character", "Prediction"
-ORDER BY "Count" DESC, "Character" ASC
+-- ORDER BY
 LIMIT %s OFFSET %s;

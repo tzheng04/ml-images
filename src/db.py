@@ -44,9 +44,28 @@ def add_prediction(true_label, predicted_label, image_b64, was_correct, confiden
             prediction_id = cur.fetchone()[0]
             return prediction_id
         
-def get_sql_stats(sql_file, limit, offset):
+def get_sql_stats(sql_file, limit, offset, sortBy, ascDesc):
+    order_by = f"""
+        ORDER BY {sortBy} {ascDesc},
+        "Created At" DESC
+    """
+
+    if (sql_file == "accuracy"):
+        order_by = f"""
+        ORDER BY {sortBy} {ascDesc}, 
+            "Accuracy" ASC, 
+            "Character" ASC
+        """
+    elif (sql_file == "confusion"):
+        order_by = f"""
+        ORDER BY {sortBy} {ascDesc}, 
+            "Count" DESC, 
+            "Character" ASC
+        """
+    
     with open(f"./sql/{sql_file}.sql", "r") as file:
         query = file.read()
+        query = query.replace("-- ORDER BY", order_by)
 
     with get_connection() as conn:
         with conn.cursor() as cur:

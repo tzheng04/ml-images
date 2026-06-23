@@ -12,5 +12,5 @@ SELECT
     total AS "Total",
     num_correct::float / NULLIF(total, 0) AS "Accuracy"
 FROM pred_counts
-ORDER BY "Accuracy" ASC, "Character" ASC
+-- ORDER BY
 LIMIT %s OFFSET %s;

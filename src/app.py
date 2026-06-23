@@ -55,7 +55,9 @@ def query():
     sql_file = request.get_json().get("sql_file")
     sql_limit = request.get_json().get("sql_limit")
     sql_offset = request.get_json().get("sql_offset")
-    cols, rows = get_sql_stats(sql_file, sql_limit, sql_offset)
+    sortBy = request.get_json().get("sort")
+    ascDesc = request.get_json().get("asc")
+    cols, rows = get_sql_stats(sql_file, sql_limit, sql_offset, sortBy, ascDesc)
 
     return jsonify({
         "received": len(rows),
