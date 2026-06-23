@@ -1,12 +1,13 @@
-# ml-images
-ML classifier for handwritten characters, with an [interactive web app](https://ml-images.onrender.com).  
+# Project Overview
+ML classifier for handwritten characters which stores user feedback in a PostgreSQL database for monitoring, analytics, and improvement.  
 
 The classifier is a Convolutional Neural Network (CNN) which classifies handwritten characters (0-9, A-Z, a-z).  
 Users can draw a character on the canvas and the model will attempt to predict which character it is.  
 Users can also provide feedback for the model's predictions to help improve accuracy.
-![Classification example](./examples/classify.png)
+![Classification example](./examples/classify.png)  
+![Analytics example](./examples/analytics.png)  
 
-# Libraries
+## Libraries
 - Flask
 - tensorflow
 - numpy
@@ -16,9 +17,22 @@ Users can also provide feedback for the model's predictions to help improve accu
 - pandas
 - sklearn
 
-# Dataset
+## Dataset
 Image set downloaded via Kaggle: [https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset](https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset)  
 Includes 62 different characters (0-9, A-Z, a-z) with 55 samples from each class.  
+
+## Schema
+A PostgreSQL database is used to keep track of model versions and user predictions.  
+- 'models': stores model name, file path, date of creation, and additional notes  
+- 'predictions: stores true label, predicted label, image data, success or failure, prediction confidence, model used, and date of creation  
+
+## Running locally
+Clone the repository and navigate into ./src. From there, run:  
+```docker compose up -d```
+```docker cp ../sql/schema.sql classifier-postgres-demo:/schema.sql```
+```docker exec -it classifier-postgres-demo psql -U postgres -d classifier_db -f /schema.sql```
+```docker cp ../sql/db_seed.sql classifier-postgres-demo:/db_seed.sql```
+```docker exec -it classifier-postgres-demo psql -U postgres -d classifier_db -f /db_seed.sql```
 
 # Initial method
 ## Preprocessing
@@ -50,8 +64,8 @@ Of course, for the purposes of the demo, there is no verification of user drawin
 The original model I trained was using for the demo was having an issue where it could not predict ['1', 'I', 'N', 'i'] (0% success rate in the demo). It also was struggling to recognize lowercase characters.  
 I figured the best way to fix this issue was to retrain the model with more samples. I spent some time to hand draw 15 samples of each class, creating an [additional dataset](./data/extra/extra.zip) with 930 new samples in total.  
 I was excited to find that this was able to bring the model's test accuracy up to 79%.  
-![Test accuracy after training with extended dataset](./examples/improved.png)
-You can observe the improvements by trying out the new model on the [interactive web app](https://ml-images.onrender.com). It's now able to consistently recognize the characters with very high confidence.
+![Test accuracy after training with extended dataset](./examples/improved.png)  
+You can observe the improvements by trying out the new model. It's now able to consistently recognize the characters with very high confidence.
 
 ## Conclusion
 Although this is a very simple application of the CNN, I was very pleased to see how well it performs.  
