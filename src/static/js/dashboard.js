@@ -2,6 +2,7 @@ import { query_stats } from "./dbApi.js";
 
 const accuracyButton = document.getElementById("accuracy-button");
 const confusionButton = document.getElementById("confusion-button");
+const modelsButton = document.getElementById("models-button");
 const resetButton = document.getElementById("reset-button");
 const tableDiv = document.getElementById("table")
 const displayText = document.getElementById("display")
@@ -10,6 +11,7 @@ const nextButton = document.getElementById("next")
 
 accuracyButton.addEventListener("click", accuracy);
 confusionButton.addEventListener("click", confusion);
+modelsButton.addEventListener("click", models);
 resetButton.addEventListener("click", reset);
 prevButton.addEventListener("click", prev);
 nextButton.addEventListener("click", next);
@@ -65,6 +67,12 @@ function accuracy() {
 function confusion() {
     reset();
     mode = "confusion";
+    analytics();
+}
+
+function models() {
+    reset();
+    mode = "models";
     analytics();
 }
 
