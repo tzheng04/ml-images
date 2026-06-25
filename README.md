@@ -18,8 +18,11 @@ Users can also provide feedback for the model's predictions to help improve accu
 - sklearn
 
 ## Dataset
-Image set downloaded via Kaggle: [https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset](https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset)  
+The classifier was originally trained with this image set downloaded via Kaggle: [https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset](https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset)  
 Includes 62 different characters (0-9, A-Z, a-z) with 55 samples from each class.  
+
+Running the demo loads the PostgreSQL database with a seed including the two models I created and 930 entries to explore with analytical SQL queries.  
+See [Dataset Extension](#dataset-extension) for more info.  
 
 ## Schema
 A PostgreSQL database is used to keep track of model versions and user predictions.  
