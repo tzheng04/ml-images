@@ -6,6 +6,7 @@ services:
       - "5000:5000"
     environment:
       DATABASE_URL: postgresql://postgres:password@postgres:5432/classifier_db
+      PYTHONPATH: /app
     depends_on:
       - postgres
 
