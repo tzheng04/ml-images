@@ -30,8 +30,12 @@ A PostgreSQL database is used to keep track of model versions and user predictio
 1. Download and install Docker Desktop  
 2. Clone the repository and navigate into ./src/  
 3. In the terminal, run the following command:  
-```docker compose up --build```
-4. The demo will be running on http://localhost:5000/
+```docker compose up --build```  
+4. The demo will be running on http://localhost:5000/  
+5. When you're done, run:  
+```docker compose stop```  
+6. You can start the app again with:  
+```docker compose up```  
 
 # Initial method
 ## Preprocessing
