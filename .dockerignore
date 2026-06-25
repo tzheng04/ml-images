@@ -1,0 +1,9 @@
+.dockerignore
+.gitignore
+.github/
+docker-compose.yaml
+Dockerfile
+README.md
+data/
+examples/
+notebooks/
