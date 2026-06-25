@@ -3,9 +3,13 @@ import numpy as np
 from PIL import Image
 import base64
 import io
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+MODEL_DIR = BASE_DIR / "models"
 
 model_name = 'char_cnn_feedback'
-model = tf.keras.models.load_model(f"./models/{model_name}.keras")
+model = tf.keras.models.load_model(MODEL_DIR / f"{model_name}.keras")
 
 classes = [
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
