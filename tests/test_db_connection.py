@@ -1,4 +1,4 @@
-from db import get_connection
+from src.db import get_connection
 
 def test_connection():
     with get_connection() as conn:

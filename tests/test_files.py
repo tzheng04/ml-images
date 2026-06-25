@@ -3,7 +3,7 @@ from pathlib import Path
 # Simple test to verify .sql files are present and paths are correct"
 def test_filenames():
     root_dir = Path(__file__).resolve().parent.parent
-    sql_dir = root_dir / "sql"
+    sql_dir = root_dir / "src" / "sql"
 
     sql_files = {
         "schema.sql",
