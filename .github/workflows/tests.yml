@@ -1,0 +1,30 @@
+name: Test
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  pytest:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Build and Docker Compose
+        run: docker compose up --build -d
+
+      - name: Show containers
+        run: docker compose ps
+      
+      - name: Run pytest
+        run: docker exec classifier-demo pytest -v
+
+      - name: Show test failures
+        if: failure()
+        run: docker compose logs
+
+      - name: Stop Docker Compose
+        if: always()
+        run: docker compose down

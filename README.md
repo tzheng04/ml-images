@@ -1,3 +1,5 @@
+![Tests](https://github.com/tzheng04/ml-images/actions/workflows/tests.yml/badge.svg)
+
 # Project Overview
 ML classifier for handwritten characters which stores user feedback in a PostgreSQL database for monitoring, analytics, and improvement.  
 
@@ -86,4 +88,4 @@ de Campos, T. E., Babu, B. R., & Varma, M. (2009). *Character recognition in nat
 Convolutional Neural Network Tutorial via TensorFlow [https://www.tensorflow.org/tutorials/images/cnn](https://www.tensorflow.org/tutorials/images/cnn)  
 
 # AI Disclaimer
-I used ChatGPT as a learning and debugging aid during development. It was useful for brainstorming ideas, troubleshooting errors, and implementing various features. 
+I used ChatGPT as a tool to learn new skills and assist with debugging during development. It was useful for brainstorming ideas, troubleshooting errors, and implementing various features--especially web deployment and Dockerization. 
