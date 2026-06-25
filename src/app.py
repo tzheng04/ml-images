@@ -3,9 +3,14 @@ import os
 from dotenv import load_dotenv
 from prediction import character_prediction
 from db import add_prediction, get_sql_stats
+from pathlib import Path
+
 app = Flask(__name__)
 
-load_dotenv("./credentials/.env")
+BASE_DIR = Path(__file__).resolve().parent
+ENV_PATH = BASE_DIR / "credentials" / ".env"
+
+load_dotenv(ENV_PATH)
 
 @app.route("/")
 def index():

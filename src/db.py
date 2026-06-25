@@ -1,8 +1,13 @@
 import os
 import psycopg
 from dotenv import load_dotenv
+from pathlib import Path
 
-load_dotenv("./credentials/.env")
+BASE_DIR = Path(__file__).resolve().parent
+ENV_PATH = BASE_DIR / "credentials" / ".env"
+SQL_DIR = BASE_DIR / "sql"
+
+load_dotenv(ENV_PATH)
 db_url = os.getenv("DATABASE_URL")
 
 def get_connection():
@@ -45,6 +50,8 @@ def add_prediction(true_label, predicted_label, image_b64, was_correct, confiden
             return prediction_id
         
 def get_sql_stats(sql_file, limit, offset, sortBy, ascDesc):
+    fp = SQL_DIR / f"{sql_file}.sql"
+
     order_by = f"""
         ORDER BY {sortBy} {ascDesc},
         "Created At" DESC
@@ -63,7 +70,7 @@ def get_sql_stats(sql_file, limit, offset, sortBy, ascDesc):
             "Character" ASC
         """
     
-    with open(f"./sql/{sql_file}.sql", "r") as file:
+    with open(fp, "r") as file:
         query = file.read()
         query = query.replace("-- ORDER BY", order_by)
 
