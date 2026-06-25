@@ -36,6 +36,9 @@ A PostgreSQL database is used to keep track of model versions and user predictio
 ```docker compose stop```  
 6. You can start the app again with:  
 ```docker compose up```  
+7. You can wipe everything and start over with:  
+```docker compose down -v```  
+```docker compose up --build```  
 
 # Initial method
 ## Preprocessing
