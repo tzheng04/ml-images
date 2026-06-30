@@ -18,7 +18,7 @@ Users can also provide feedback for the model's predictions to help improve accu
 - psycopg
 - pytest
 - python-dotenv
-- sklearn
+- scikit-learn
 - tensorflow
 
 ## Dataset

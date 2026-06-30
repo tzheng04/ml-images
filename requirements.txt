@@ -6,5 +6,5 @@ pillow
 psycopg[binary]
 pytest
 python-dotenv
-sklearn
+scikit-learn
 tensorflow
