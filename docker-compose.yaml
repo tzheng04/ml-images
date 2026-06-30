@@ -7,6 +7,7 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:password@postgres:5432/classifier_db
       PYTHONPATH: /app
+      MLFLOW_TRACKING: 
     depends_on:
       - postgres
 
@@ -23,6 +24,21 @@ services:
       - classifier-postgres-data:/var/lib/postgresql/
       - ./src/sql/schema.sql:/docker-entrypoint-initdb.d/1-schema.sql
       - ./src/sql/db_seed.sql:/docker-entrypoint-initdb.d/2-db_seed.sql
+  
+  mlflow:
+    image: ghcr.io/mlflow/mlflow:v3.1.1
+    container_name: classifier-mlflow
+    ports:
+      - "5001:5000"
+    volumes:
+      - mlflow-data:/mlflow
+    command: >
+      mlflow server
+      --host 0.0.0.0
+      --port 5000
+      --backend-store-uri sqlite:////mlflow/mlflow.db
+      --default-artifact-root /mlflow/artifacts
 
 volumes:
   classifier-postgres-data:
+  mlflow-data:
