@@ -11,13 +11,15 @@ Users can also provide feedback for the model's predictions to help improve accu
 
 ## Libraries
 - Flask
-- tensorflow
+- mlflow
 - numpy
-- Pillow
-- python-dotenv
-- psycopg
 - pandas
+- Pillow
+- psycopg
+- pytest
+- python-dotenv
 - sklearn
+- tensorflow
 
 ## Dataset
 The classifier was originally trained with this image set downloaded via Kaggle: [https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset](https://www.kaggle.com/datasets/dhruvildave/english-handwritten-characters-dataset)  

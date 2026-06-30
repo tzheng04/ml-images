@@ -1,7 +1,9 @@
 flask
-tensorflow
+mlflow
 numpy
+pandas
 pillow
-python-dotenv
 psycopg[binary]
 pytest
+python-dotenv
+tensorflow
