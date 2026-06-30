@@ -7,9 +7,10 @@ services:
     environment:
       DATABASE_URL: postgresql://postgres:password@postgres:5432/classifier_db
       PYTHONPATH: /app
-      MLFLOW_TRACKING: 
+      MLFLOW_TRACKING: http://mlflow:5000
     depends_on:
       - postgres
+      - mlflow
 
   postgres:
     image: postgres:18
