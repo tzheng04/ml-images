@@ -4,6 +4,7 @@
 docker-compose.yaml
 Dockerfile
 README.md
-data/
+src/data/extra/
+src/data/images.zip
 examples/
 notebooks/

@@ -1,7 +1,7 @@
-data/Img
-data/sets
-data/english.csv
-data/images.zip
-data/extra/*.png
+src/data/Img
+src/data/sets
+src/data/english.csv
+src/data/images.zip
+src/data/extra/*.png
 src/credentials
 src/__pycache__
