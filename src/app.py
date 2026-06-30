@@ -1,9 +1,12 @@
-from flask import Flask, render_template, request, jsonify
 import os
+from pathlib import Path
+
+from flask import Flask, render_template, request, jsonify
 from dotenv import load_dotenv
+
 from src.prediction import character_prediction
 from src.db import add_prediction, get_sql_stats
-from pathlib import Path
+
 
 app = Flask(__name__)
 

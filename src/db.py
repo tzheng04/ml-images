@@ -1,7 +1,9 @@
 import os
+from pathlib import Path
+
 import psycopg
 from dotenv import load_dotenv
-from pathlib import Path
+
 
 BASE_DIR = Path(__file__).resolve().parent
 ENV_PATH = BASE_DIR / "credentials" / ".env"
