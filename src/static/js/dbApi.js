@@ -35,7 +35,7 @@ export async function sendToDB(truth, prediction, img, correct, conf, model_name
     console.log("Response:", text);
 }
 
-export async function query_stats(query_type, limit, offset, sortBy, ascDesc) {
+export async function query_stats(query_type, limit, offset, sortBy, ascDesc, model_id="0") {
     const response = await fetch("/query", {
         method: "POST",
         headers: {
@@ -46,7 +46,8 @@ export async function query_stats(query_type, limit, offset, sortBy, ascDesc) {
             sql_limit: limit,
             sql_offset: offset,
             sort: sortBy,
-            asc: ascDesc
+            asc: ascDesc,
+            model: model_id
         })
     });
 

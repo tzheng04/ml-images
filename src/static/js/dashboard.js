@@ -5,6 +5,7 @@ const confusionButton = document.getElementById("confusion-button");
 const modelsButton = document.getElementById("models-button");
 
 const sortDropdowns = document.getElementById("sort-dropdowns");
+const modelSelect = document.getElementById("model-select");
 const sortBy = document.getElementById("sort-by");
 const ascDesc = document.getElementById("asc-desc");
 
@@ -28,6 +29,7 @@ accuracyButton.addEventListener("click", accuracy);
 confusionButton.addEventListener("click", confusion);
 modelsButton.addEventListener("click", models);
 
+modelSelect.addEventListener("change", modelChange);
 sortBy.addEventListener("change", analytics);
 ascDesc.addEventListener("change", analytics);
 
@@ -39,6 +41,14 @@ nextButton.addEventListener("click", next);
 let mode = null;
 let page = 0;
 let max = 0;
+
+window.addEventListener("DOMContentLoaded", async () => {
+    const models = await query_stats("models", 100, 0, "\"Created At\"", "DESC");
+    
+    for (let i = 0; i < models.received; i++) {
+        modelSelect.add(new Option(models.rows[i][0], `${models.received - i}`))
+    }
+});
 
 function generateTable(cols, rows) {
     let displayEnd = ((10 <= rows.length) ? 10 : rows.length);
@@ -66,15 +76,24 @@ function generateTable(cols, rows) {
 }
 
 async function analytics() {
-    if (max == 0) {
-        const allResults = await query_stats(mode, 1000, 0, "\""+sortBy.value+"\"", ascDesc.value);
-        max = allResults.received;
-    }
-    const result = await query_stats(mode, 10, page*10, "\""+sortBy.value+"\"", ascDesc.value);
-    console.log(mode, result.cols, result.rows);
+    const allResults = await query_stats(mode, 1000, 0, "\""+sortBy.value+"\"", ascDesc.value, modelSelect.value);
+    max = allResults.received;
+    const result = await query_stats(mode, 10, page*10, "\""+sortBy.value+"\"", ascDesc.value, modelSelect.value);
     let { table, displayEnd } = generateTable(result.cols, result.rows);
-    displayText.innerText = `Displaying page ${page+1}: ${page*10+1}-${page*10+displayEnd} of ${max} rows`;
+    let start = (page*10+1 <= page*10+displayEnd) ? page*10+1 : page*10+displayEnd;
+    displayText.innerText = `Displaying page ${page+1}: ${start}-${page*10+displayEnd} of ${max} rows`;
     displayVisibility();
+    tableDiv.innerHTML = table;
+}
+
+async function model_analytics() {
+    const allResults = await query_stats(mode, 1000, 0, "\""+sortBy.value+"\"", ascDesc.value);
+    max = allResults.received;
+    const result = await query_stats(mode, 10, page*10, "\""+sortBy.value+"\"", ascDesc.value);
+    let { table, displayEnd } = generateTable(result.cols, result.rows);
+    let start = (page*10+1 <= page*10+displayEnd) ? page*10+1 : page*10+displayEnd;
+    displayText.innerText = `Displaying page ${page+1}: ${start}-${page*10+displayEnd} of ${max} rows`;
+    displayModels();
     tableDiv.innerHTML = table;
 }
 
@@ -107,11 +126,22 @@ function models() {
     sortBy.add(timeOption);
     sortBy.value = "Created At";
     ascDesc.value = "DESC";
+    model_analytics();
+}
+
+function modelChange() {
+    page = 0;
     analytics();
 }
 
 function displayVisibility() {
     sortDropdowns.removeAttribute("hidden");
+    prevButton.removeAttribute("hidden");
+    nextButton.removeAttribute("hidden");
+    resetButton.removeAttribute("hidden");
+}
+
+function displayModels() {
     prevButton.removeAttribute("hidden");
     nextButton.removeAttribute("hidden");
     resetButton.removeAttribute("hidden");

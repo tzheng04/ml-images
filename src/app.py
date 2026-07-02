@@ -61,12 +61,16 @@ def dashboard():
 
 @app.route("/query", methods=["POST"])
 def query():
-    sql_file = request.get_json().get("sql_file")
-    sql_limit = request.get_json().get("sql_limit")
-    sql_offset = request.get_json().get("sql_offset")
-    sortBy = request.get_json().get("sort")
-    ascDesc = request.get_json().get("asc")
-    cols, rows = get_sql_stats(sql_file, sql_limit, sql_offset, sortBy, ascDesc)
+    json = request.get_json()
+    
+    sql_file = json.get("sql_file")
+    sql_limit = json.get("sql_limit")
+    sql_offset = json.get("sql_offset")
+    sortBy = json.get("sort")
+    ascDesc = json.get("asc")
+    model_id = json.get("model")
+
+    cols, rows = get_sql_stats(sql_file, sql_limit, sql_offset, sortBy, ascDesc, model_id)
 
     return jsonify({
         "received": len(rows),

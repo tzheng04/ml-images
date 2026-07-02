@@ -51,30 +51,52 @@ def add_prediction(true_label, predicted_label, image_b64, was_correct, confiden
             prediction_id = cur.fetchone()[0]
             return prediction_id
         
-def get_sql_stats(sql_file, limit, offset, sortBy, ascDesc):
+def get_sql_stats(sql_file, limit, offset, sortBy, ascDesc, model_id):
     fp = SQL_DIR / f"{sql_file}.sql"
 
     order_by = f"""
-        ORDER BY {sortBy} {ascDesc},
-        "Created At" DESC
+        ORDER BY 
+            {sortBy} {ascDesc},
+            "Created At" DESC
+    """
+
+    where = f"""
+        -- WHERE
     """
 
     if (sql_file == "accuracy"):
         order_by = f"""
-        ORDER BY {sortBy} {ascDesc}, 
-            "Accuracy" ASC, 
-            "Character" ASC
+            ORDER BY 
+                {sortBy} {ascDesc}, 
+                "Accuracy" ASC, 
+                "Character" ASC
         """
+
+        if (model_id != "0"):
+            where = f"""
+                WHERE model_id = {model_id}
+            """
+
     elif (sql_file == "confusion"):
         order_by = f"""
-        ORDER BY {sortBy} {ascDesc}, 
+            ORDER BY {sortBy} {ascDesc}, 
             "Count" DESC, 
             "Character" ASC
         """
+
+        if (model_id != "0"):
+            where = f"""
+                WHERE model_id = {model_id} AND NOT was_correct
+            """
+        else:
+            where = f"""
+                WHERE NOT was_correct
+            """
     
     with open(fp, "r") as file:
         query = file.read()
         query = query.replace("-- ORDER BY", order_by)
+        query = query.replace("-- WHERE", where)
 
     with get_connection() as conn:
         with conn.cursor() as cur:
