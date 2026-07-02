@@ -4,6 +4,7 @@ WITH pred_counts AS (
         SUM(CASE WHEN was_correct THEN 1 ELSE 0 END) AS num_correct,
         COUNT(*) AS total
     FROM predictions
+    -- WHERE
     GROUP BY true_label
 )
 SELECT

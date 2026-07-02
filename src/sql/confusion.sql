@@ -3,7 +3,7 @@ SELECT
     predicted_label AS "Prediction",
     COUNT(*) AS "Count"
 FROM predictions
-WHERE NOT was_correct
+-- WHERE
 GROUP BY "Character", "Prediction"
 -- ORDER BY
 LIMIT %s OFFSET %s;
