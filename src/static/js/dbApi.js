@@ -1,10 +1,11 @@
-export async function requestPrediction(imageData) {
+export async function requestPrediction(modelName, imageData) {
     const response = await fetch("/predict", {
         method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
         body: JSON.stringify({
+            model: modelName,
             image: imageData
         })
     });

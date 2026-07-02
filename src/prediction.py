@@ -10,9 +10,6 @@ from PIL import Image
 BASE_DIR = Path(__file__).resolve().parent
 MODEL_DIR = BASE_DIR / "models"
 
-model_name = 'char_cnn_feedback'
-model = tf.keras.models.load_model(MODEL_DIR / f"{model_name}.keras")
-
 classes = [
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 
@@ -40,8 +37,9 @@ def preprocess_img(input):
 
     return img_arr
 
-def character_prediction(image):
+def character_prediction(model_name, image):
     processed = preprocess_img(image)
+    model = tf.keras.models.load_model(MODEL_DIR / f"{model_name}.keras")
 
     prediction = model.predict(processed)[0]
 
@@ -50,6 +48,6 @@ def character_prediction(image):
     res = classes[class_predictions]
     conf = float(prediction[class_predictions])
     
-    return res, conf, model_name
+    return res, conf
 
 

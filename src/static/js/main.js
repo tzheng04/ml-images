@@ -5,7 +5,10 @@ import {
     setConfirmationPending
 } from "./canvas.js";
 
-import { requestPrediction } from "./dbApi.js";
+import { 
+    requestPrediction,
+    query_stats
+ } from "./dbApi.js";
 
 import {
     setResult,
@@ -17,6 +20,7 @@ import {
     resetFeedback
 } from "./feedback.js";
 
+const modelSelect = document.getElementById("model-select");
 const clearCanvasButton = document.getElementById("clearCanvas-button");
 const predictButton = document.getElementById("predict-button");
 const correctButton = document.getElementById("correct-button");
@@ -35,10 +39,18 @@ incorrectButton.addEventListener("click", incorrect);
 submitFeedbackButton.addEventListener("click", submitFeedback);
 cancelButton.addEventListener("click", cancel);
 
+window.addEventListener("DOMContentLoaded", async () => {
+    const models = await query_stats("models", 100, 0, "\"Created At\"", "DESC");
+    
+    for (let i = 0; i < models.received; i++) {
+        modelSelect.add(new Option(models.rows[i][0], models.rows[i][0]))
+    }
+});
+
 async function predict() {
     const imageData = getCanvasImage();
 
-    const result = await requestPrediction(imageData);
+    const result = await requestPrediction(modelSelect.value, imageData);
 
     setResult(result);
 

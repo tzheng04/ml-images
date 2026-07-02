@@ -23,13 +23,14 @@ def index():
 def predict():
     data = request.get_json()
     input = data["image"]
+    model = data["model"]
 
-    res, conf, model_name = character_prediction(input)
+    res, conf = character_prediction(model, input)
 
     return jsonify({
         "prediction": res,
         "confidence": conf,
-        "model_name": model_name
+        "model_name": model
     })
 
 @app.route("/submit", methods=["POST"])
