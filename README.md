@@ -46,6 +46,8 @@ A PostgreSQL database is used to keep track of model versions and user predictio
 7. You can wipe everything and start over with:  
 ```docker compose down -v```  
 ```docker compose up --build```  
+8. Retrain the model with:  
+```docker exec -it classifier-demo python -m src.training.train```  
 
 # Initial method
 ## Preprocessing
