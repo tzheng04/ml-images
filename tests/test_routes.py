@@ -18,6 +18,7 @@ def test_accuracy():
             "sql_offset": "0",
             "sort": "\"Accuracy\"",
             "asc": "ASC",
+            "model": "0"
         }
     )
 
@@ -41,6 +42,7 @@ def test_confusion():
             "sql_offset": "0",
             "sort": "\"Count\"",
             "asc": "DESC",
+            "model": "0"
         }
     )
 
@@ -64,6 +66,7 @@ def test_models():
             "sql_offset": "0",
             "sort": "\"Created At\"",
             "asc": "DESC",
+            "model": "0"
         }
     )
 
