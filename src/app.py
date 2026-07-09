@@ -19,6 +19,7 @@ load_dotenv(ENV_PATH)
 def index():
     return render_template("index.html")
 
+# Calls prediction API and returns label, confidence, and model used
 @app.route("/predict", methods=["POST"])
 def predict():
     data = request.get_json()
@@ -33,6 +34,7 @@ def predict():
         "model_name": model
     })
 
+# Adds record to database and returns new id
 @app.route("/submit", methods=["POST"])
 def updateDB():
     data = request.get_json()
@@ -59,6 +61,8 @@ def updateDB():
 def dashboard():
     return render_template("dashboard.html")
 
+# Executes SQL query with parameters
+# Returns number of rows, column names as array, records as 2d array
 @app.route("/query", methods=["POST"])
 def query():
     json = request.get_json()
@@ -70,6 +74,7 @@ def query():
     ascDesc = json.get("asc")
     model_id = json.get("model")
 
+    # Executes query given parameters
     cols, rows = get_sql_stats(sql_file, sql_limit, sql_offset, sortBy, ascDesc, model_id)
 
     return jsonify({

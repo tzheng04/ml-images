@@ -39,6 +39,8 @@ incorrectButton.addEventListener("click", incorrect);
 submitFeedbackButton.addEventListener("click", submitFeedback);
 cancelButton.addEventListener("click", cancel);
 
+// Populates dropdown with available models when DOM loads
+// Assumes <= 100 models available
 window.addEventListener("DOMContentLoaded", async () => {
     const models = await query_stats("models", 100, 0, "\"Created At\"", "DESC");
     
@@ -47,6 +49,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     }
 });
 
+// Called when user chooses "Predict", sends image to prediction API
 async function predict() {
     const imageData = getCanvasImage();
 
@@ -61,6 +64,7 @@ async function predict() {
     setConfirmationPending(true);
 }
 
+// Called when choosing "Clear", sets the canvas back to white and resets element visiblity
 function clearCanvas() {
     clearCanvasDrawing();
 
