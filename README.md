@@ -6,8 +6,10 @@ ML classifier for handwritten characters which stores user feedback in a Postgre
 The classifier is a Convolutional Neural Network (CNN) which classifies handwritten characters (0-9, A-Z, a-z).  
 Users can draw a character on the canvas and the model will attempt to predict which character it is.  
 Users can also provide feedback for the model's predictions to help improve accuracy.
-![Classification example](./examples/classify.png)  
-![Analytics example](./examples/analytics.png)  
+![Classification example](./examples/classify_2.png)  
+![Analytics example: "accuracy" query](./examples/accuracy.png)  
+![Analytics example: "confusion" query](./examples/confusion.png)  
+![Analytics example: "models" query](./examples/models.png)  
 
 ## Libraries
 - Flask
